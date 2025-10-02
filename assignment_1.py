@@ -82,6 +82,7 @@ def get_gauss_jordan(matrix, unit_matrix):
             for j in range(n):
                 if matrix[j][i] != 0.0:
                     swap(matrix, i, j)
+                    swap(unit_matrix, i, j)
                     node = matrix[i][i]
                     break
         for j in range(n):
