@@ -1,4 +1,5 @@
 import sys;read=sys.stdin.readline
+import copy
 '''
 1. 행렬 입력 기능
 2. 행렬식을 이용한 역행렬 계산 기능
@@ -11,7 +12,7 @@ def input_matrix():
     print(">> N을 입력해주세요", end=" ")
     n = int(read())
     matrix = []
-    for i in range(n):
+    for i in range(1,n+1):
         print(">> %d번째 행" %i, end=" ")
         arr = list(map(float,read().split()))
         matrix.append(arr)
@@ -113,19 +114,37 @@ def compare(matrix_1, matrix_2):
                 return print("두 행렬은 서로 다름")
     return print("두 행렬은 동일함")
 
+def check(matrix, inversed_matrix):
+    n = len(matrix)
+    res_arr = [[0 for i in range(n)] for j in range(n)]
+    for i in range(n):
+        for j in range(n):
+            for k in range(n):
+                res_arr[i][j] += matrix[i][k] * inversed_matrix[k][j]
+    print_matrix(res_arr)
+    return
 def main():
     matrix = input_matrix()
+    matrix_for_check = copy.deepcopy(matrix)
     if determinant(matrix) != 0:
         cofactor_matrix = get_cofactor_matrix(matrix)
         inverse_matrix_cofactor = get_inverse_cofactor(matrix, cofactor_matrix)
         unit_matrix = make_unit_matrix(len(matrix))
         gauss_jordan = get_gauss_jordan(matrix, unit_matrix)
+        print("------------------------")
         print("행렬식을 이용하여 구한 역행렬")
         print_matrix(inverse_matrix_cofactor)
         print("------------------------")
         print("가우스-조던 소거법을 이용하여 구한 역행렬")
         print_matrix(gauss_jordan)
+        print("------------------------")
         compare(inverse_matrix_cofactor, gauss_jordan)
+        print("------------------------")
+        print("행렬식을 이용하여 구한 역행렬 검산")
+        check(matrix_for_check, inverse_matrix_cofactor)
+        print("------------------------")
+        print("가우스 - 조던 소거법을 이용하여 구한 역행렬 검산")
+        check(matrix_for_check, gauss_jordan)
     else:
         print("det(A)=0, 역행렬이 존재하지 않습니다.")
 
