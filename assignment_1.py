@@ -110,7 +110,9 @@ def compare(matrix_1, matrix_2):
     n = len(matrix_1)
     for i in range(n):
         for j in range(n):
-            if f"{matrix_1[i][j]:.2f}" != f"{matrix_2[i][j]:.2f}":
+            if abs(matrix_1[i][j] - matrix_2[i][j]) > 1e-3:
+                print(matrix_1[i][j])
+                print(matrix_2[i][j])
                 return print("두 행렬은 서로 다름")
     return print("두 행렬은 동일함")
 
@@ -150,3 +152,23 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+'''
+testcase1.
+3 2 1
+1 2 3
+2 1 3
+
+testcase2.
+2 1 3 2
+1 0 2 1
+4 1 8 5
+5 1 3 2
+
+testcase3.
+2 1 3 2 2
+1 0 2 1 4
+4 1 8 5 1
+5 1 3 2 7
+-1 5 2 2 3
+'''
