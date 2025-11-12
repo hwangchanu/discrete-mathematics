@@ -24,7 +24,9 @@ def reflect(matrix):
     for i in range(N):
         for j in range(N):
             if i == j and matrix[i][j] != 1:
+                print("반사가 아닙니다")
                 return False
+    print("반사입니다")
     return True
 
 #대칭 : (x, y)가 있을 때 (y, x)도 있어야 함
@@ -32,7 +34,9 @@ def symmetric(matrix):
     for i in range(N):
         for j in range(N):
             if (matrix[i][j] == 1) and (matrix[j][i] == 0):
+                print("대칭이 아닙니다")
                 return False
+    print("대칭입니다")
     return True
 
 #추이
@@ -42,7 +46,9 @@ def transitive(matrix):
             if (matrix[i][j] == 1):
                 for k in range(N):
                     if (matrix[j][k] == 1) and (matrix[i][k] == 0):
+                        print("추이가 아닙니다")
                         return False
+    print("추이입니다")
     return True
 
 #동치 관계 확인, 각 원소 동치류 출력
